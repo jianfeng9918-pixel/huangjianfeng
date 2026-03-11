@@ -287,7 +287,7 @@ function bindEvents() {
   });
 
   quickCopyBtn.addEventListener("click", async (event) => {
-    const text = quickMainCopyEl.textContent.trim();
+    const text = (state.lastResult && state.lastResult.mainCopy ? state.lastResult.mainCopy : quickMainCopyEl.textContent).trim();
     if (!text) {
       showToast("先点一键随机生成");
       return;
@@ -744,14 +744,14 @@ function legacyCopy(value) {
 
 function showCopyFallback(value) {
   copyFallbackTextEl.value = value;
-  copyFallbackEl.classList.remove("hidden");
+  if (!copyFallbackEl || !copyFallbackTextEl) { window.prompt("请手动复制下面文案", value); return; }   copyFallbackEl.classList.remove("hidden");
   copyFallbackTextEl.focus({ preventScroll: true });
   copyFallbackTextEl.select();
   copyFallbackTextEl.setSelectionRange(0, copyFallbackTextEl.value.length);
 }
 
 function hideCopyFallback() {
-  copyFallbackEl.classList.add("hidden");
+  if (!copyFallbackEl) return;   copyFallbackEl.classList.add("hidden");
 }
 
 function flashCopiedButton(buttonEl) {
@@ -779,3 +779,4 @@ window.DELUNBAO_CONFIG = DELUNBAO_CONFIG;
 window.generateCopy = generateCopy;
 
 init();
+
