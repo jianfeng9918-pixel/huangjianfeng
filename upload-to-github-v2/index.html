@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>德伦堡朋友圈文案生成器</title>
+  <meta name="description" content="门店老板通过选择题快速生成德伦堡风格朋友圈文案，支持一键随机生成和一键复制。">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-brand">
+        <img class="brand-logo" src="./assets/delunbao-logo-yellow.png" alt="德伦堡 logo">
+        <div class="brand-copy">
+          <p class="eyebrow">Delunbao Tool</p>
+          <h1>德伦堡朋友圈文案生成器</h1>
+        </div>
+      </div>
+      <p class="hero-sub">先点一键生成，不满意再按下面4步微调。</p>
+    </header>
+
+    <main class="panel">
+      <section class="step-card quick-card">
+        <h2>一键随机生成</h2>
+        <p class="hint">不用填内容，点一下就出一条能直接发的朋友圈。</p>
+        <div class="actions one-col">
+          <button id="quickGenBtn" class="btn btn-primary">一键随机生成</button>
+        </div>
+
+        <div id="quickOutput" class="quick-output hidden">
+          <p class="quick-output-label">这条可以直接发：</p>
+          <p id="quickMainCopy" class="quick-output-text"></p>
+          <button id="quickCopyBtn" class="btn btn-ghost quick-copy-btn" type="button">一键复制这条文案</button>
+        </div>
+      </section>
+
+      <section class="mode-tip">
+        <p>想更精准？按下面 4 步选一下就行</p>
+      </section>
+
+      <section class="step-card">
+        <h2>步骤1：你今天要发啥</h2>
+        <p class="hint">卖酒、发活动、拉人进群，选最接近的一项。</p>
+        <div id="goalOptions" class="option-grid"></div>
+      </section>
+
+      <section class="step-card">
+        <h2>步骤2：你想怎么说</h2>
+        <p class="hint">选一种顺嘴语气，文案更像你平时发圈。</p>
+        <div id="styleOptions" class="option-grid"></div>
+      </section>
+
+      <section class="step-card">
+        <h2>步骤3：选今天主推产品</h2>
+        <p class="hint">直接点下拉选一个产品，不用自己打字。</p>
+        <div class="field-grid">
+          <label class="field">
+            <span>今天主推哪个产品</span>
+            <select id="productSelect"></select>
+          </label>
+
+          <p id="priceHint" class="price-hint">选完这里会显示：目前只要多少钱。</p>
+
+          <label class="field">
+            <span>活动信息（可选）</span>
+            <input id="activityInfo" type="text" placeholder="例：今晚到店第二件减20，10点截止">
+          </label>
+
+          <label class="field">
+            <span>补充说明（可选）</span>
+            <input id="extraInfo" type="text" placeholder="例：可送货，可提前留货">
+          </label>
+        </div>
+        <p class="popular-tips">推荐先发：28天锁鲜 / 小绿棒子 / 德伦堡小金罐 / 法式白啤 / 大绿棒子</p>
+      </section>
+
+      <section class="step-card">
+        <h2>步骤4：生成并复制</h2>
+        <div class="actions">
+          <button id="generateBtn" class="btn btn-primary">一键生成</button>
+          <button id="rerollBtn" class="btn btn-secondary">换一版文案</button>
+          <button id="copyMainBtn" class="btn btn-ghost">复制主文案</button>
+          <button id="copyAllBtn" class="btn btn-ghost">复制全部结果</button>
+        </div>
+      </section>
+
+      <section id="resultCard" class="result-card result-hidden">
+        <div class="result-head">
+          <h2>生成结果</h2>
+          <span id="statusTag" class="status-tag">模板生成</span>
+        </div>
+
+        <article class="result-block">
+          <div class="result-block-head">
+            <h3>主文案（50-90字）</h3>
+            <button id="copyMainInlineBtn" class="mini-copy-btn" type="button">复制主文案</button>
+          </div>
+          <p id="mainCopy" class="copy-text">点击“一键生成”开始。</p>
+        </article>
+
+        <article class="result-block">
+          <div class="result-block-head">
+            <h3>备选文案</h3>
+            <button id="copyAltAllBtn" class="mini-copy-btn" type="button">复制备选文案</button>
+          </div>
+          <div id="alternativeCards" class="result-items"></div>
+        </article>
+
+        <article class="result-block">
+          <div class="result-block-head">
+            <h3>配图建议</h3>
+          </div>
+          <div id="imageCards" class="result-items"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="copyFallback" class="copy-fallback hidden" role="dialog" aria-modal="true" aria-labelledby="copyFallbackTitle">
+    <div class="copy-fallback-card">
+      <h3 id="copyFallbackTitle">自动复制失败</h3>
+      <p>请长按下方文字手动复制：</p>
+      <textarea id="copyFallbackText" readonly></textarea>
+      <button id="copyFallbackClose" class="btn btn-primary" type="button">我已复制，关闭</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
