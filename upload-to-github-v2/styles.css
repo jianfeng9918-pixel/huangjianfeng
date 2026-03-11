@@ -4,10 +4,10 @@
   --ink: #111111;
   --sub: #414141;
   --brand: #f5d400;
-  --brand-strong: #e5c200;
+  --brand-strong: #d4ae00;
   --line: #ecdf9a;
   --ok: #1f7a42;
-  --shadow: 0 12px 26px rgba(60, 39, 8, 0.12);
+  --shadow: 0 14px 30px rgba(60, 39, 8, 0.16);
 }
 
 * {
@@ -541,5 +541,6 @@ body {
     grid-column: auto;
   }
 }
+
 
 
