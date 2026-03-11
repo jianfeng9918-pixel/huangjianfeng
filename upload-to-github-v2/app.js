@@ -216,7 +216,7 @@ function renderProductSelect() {
 
   const emptyOption = document.createElement("option");
   emptyOption.value = "";
-  emptyOption.textContent = "暂时不选（系统自动推荐热卖）";
+  emptyOption.textContent = "点这里选择想主推的品";
   productSelectEl.appendChild(emptyOption);
 
   const recommendedSet = new Set(DELUNBAO_CONFIG.recommendedProductIds);
@@ -430,7 +430,7 @@ function buildCopyVariant(input) {
   const action = pickBySeed(DELUNBAO_CONFIG.actions[input.goalId], input.seed + 3);
   const ending = pickBySeed(DELUNBAO_CONFIG.endings[input.goalId], input.seed + 4);
   const productText = `${input.product.name}(${input.product.spec})`;
-  const priceText = `目前只要 ${input.product.price}`;
+  const priceText = pickBySeed([     `目前只要 ${input.product.price}`,     `现在到手 ${input.product.price}`,     `今天价 ${input.product.price}`,     `到店参考价 ${input.product.price}`   ], input.seed + 29);
   const activity = shrinkText(input.activityInfo || defaultActivityByGoal(input.goalId), 20);
   const extra = shrinkText(input.extraInfo, 16);
 
@@ -779,4 +779,5 @@ window.DELUNBAO_CONFIG = DELUNBAO_CONFIG;
 window.generateCopy = generateCopy;
 
 init();
+
 
